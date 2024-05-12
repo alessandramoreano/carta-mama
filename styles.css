@@ -1,95 +1,165 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #ffffff; /* Fondo blanco */
+  background-color: #FBE4DF;
 }
-
-.container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 .card {
-    width: 60%;
-    height: 50%;
-    background-color: #ff0000; /* Exterior de la carta - rojo */
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    perspective: 2000px;
+  width: 640px;
+  height: 400px;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  perspective: 1200px;
+  transition: 1s;
+}
+.card:hover {
+  transform: rotate(-5deg);
+}
+.card:hover .outside {
+  transform: rotateY(-130deg);
+}
+.outside,
+.inside {
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  left: 50.1%;
+}
+.inside {
+  background: linear-gradient(to right, #e7e7e7, #ffffff 30%);
+  line-height: 3;
+  padding: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  left: 50%;
 }
 
-.card-inner {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    transform-style: preserve-3d;
-    transition: transform 3s ease-in-out;
+
+.outside {
+  transform-style: preserve-3d;
+  z-index: 1;
+  transform-origin: left;
+  transition: 2s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.card-inner.opened {
+.outside img {
+  width: 90%; /* Reducimos el ancho de la imagen al 90% del contenedor */
+  max-height: 90%; /* Permitimos que la altura se ajuste automáticamente para mantener la relación de aspecto */
+  object-fit: cover; /* Ajusta la imagen para que se ajuste al contenedor manteniendo la relación de aspecto */
+  margin: 0 auto;
+}
+
+.front,
+.back {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: rotateX(0deg);
+}
+.front {
+    background-color: #ffffff;
+}
+.back {
     transform: rotateY(180deg);
+    background: linear-gradient(to left, #e7e7e7, #ffffff 30%);
 }
 
-.left-side,
-.right-side {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backface-visibility: hidden;
+.heart {
+  position: relative;
+  background-color: #d04e4e;
+  height: 60px;
+  width: 60px;
+  transform: rotate(-45deg);
+  animation: .8s beat infinite;
 }
 
-.left-side img {
-    width: 80%;
-    max-height: 80%;
-    transform: rotateY(180deg); /* Invierte la imagen */
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: #d04e4e;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  position: absolute;
+}
+  
+  .heart:before {
+    top: -30px;
+    left: 0;
 }
 
-.right-side {
-    background-color: #ffffff; /* Interior de la carta - blanco */
-    color: #000000;
-    padding: 20px;
-    transform: rotateY(180deg);
+.heart:after {
+    left: 30px;
+    top: 0;
 }
 
-.flowers {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
 
-.flower {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #ff8b94; /* Rosa casi rojo */
-    animation: flower-animation 4s infinite alternate;
-}
 
-.flower-left {
-    animation-delay: 0.5s;
-}
-
-.flower-right {
-    animation-delay: 1s;
-}
-
-@keyframes flower-animation {
-    0% {
-        transform: translateY(0);
+@keyframes close {
+    0%, 100% {
+        transform: scale(1, .05);
     }
-    50% {
-        transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(0);
+    5%, 95% {
+        transform: scale(1, 1);
     }
 }
+
+@keyframes beat {
+  0%, 40%, 100% {
+    transform: scale(1) rotate(-45deg);
+  }
+  25%, 60% {
+    transform: scale(1.1) rotate(-45deg);
+  }
+}
+
+.outside p {
+  font-size: 23px;
+  text-transform: uppercase;
+  margin-top: 30px;
+  text-align: center;
+  letter-spacing: 6px;
+  color: #000046;
+}
+
+.outside img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.inside {
+  background: linear-gradient(to right, #e7e7e7, #ffffff 30%);
+  line-height: 3;
+  padding: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  left: 50%;
+}
+
+.inside h1 {
+  font-size: 120px;
+  line-height: 120px;
+}
+
+
